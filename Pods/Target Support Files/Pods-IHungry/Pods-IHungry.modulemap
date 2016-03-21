@@ -1,0 +1,6 @@
+framework module Pods_IHungry {
+  umbrella header "Pods-IHungry-umbrella.h"
+
+  export *
+  module * { export * }
+}
