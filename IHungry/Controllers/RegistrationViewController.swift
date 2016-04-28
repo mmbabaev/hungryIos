@@ -2,51 +2,60 @@
 //  RegistrationViewController.swift
 //  IHungry
 //
-//  Created by Михаил on 19.03.16.
+//  Created by Михаил on 21.03.16.
 //  Copyright © 2016 Mihail. All rights reserved.
 //
 
 import UIKit
-import ActionSheetPicker_3_0
 import SwiftForms
 
-class RegistrationViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var surnameField: UITextField!
-    @IBOutlet weak var sexSegment: UISegmentedControl!
-    @IBOutlet weak var passField: UITextField!
-    @IBOutlet weak var confirmPassField: UITextField!
-    
-    @IBOutlet weak var phoneField: UITextField!
-    @IBOutlet weak var dormField: UITextField!
-    @IBOutlet weak var roomField: UITextField!
-    @IBOutlet weak var facultyField: UITextField!
+class RegistrationViewController: FormViewController {
 
-    var mail: String!
-    var dorms = ["dorm 1", "dorm 2"]
-    var faculties = ["f 1", "f 2", "f 3"]
+    @IBOutlet weak var userImageView: UIImageView!
     
-     let imagePicker = UIImagePickerController()
+    struct Static {
+        static let name = "name"
+        static let password = "pass"
+        static let confirmPassword = "confirmPassword"
+        static let surname = "surname"
+        static let sex = "gender"
+        static let dorm = "dorm_id"
+        static let flat = "flat"
+        static let phone = "phone"
+        static let faculty = "fac_id"
+    }
+    
+    var nameField: FormRowDescriptor!
+    var surnameField: FormRowDescriptor!
+    var passwordField: FormRowDescriptor!
+    var confirmPasswordField: FormRowDescriptor!
+    var sexSegment: FormRowDescriptor!
+    var dormPicker: FormRowDescriptor!
+    var flatField: FormRowDescriptor!
+    var phoneField: FormRowDescriptor!
+    var facultyPicker: FormRowDescriptor!
+
+    var mail: String! = "mmbabaev@gmail.com"
+    var code: String! = ""
+    let imagePicker = UIImagePickerController()
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.loadForms()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nextButton = UIBarButtonItem(title: "Готово", style: .Plain, target: self, action: "nextClicked:")
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отмена", style: .Plain, target: self, action: #selector(RegistrationViewController.cancel(_:)))
+        
+        let nextButton = UIBarButtonItem(title: "Готово", style: .Plain, target: self, action: #selector(RegistrationViewController.nextClicked(_:)))
         self.navigationItem.rightBarButtonItem = nextButton
         
         imagePicker.delegate = self
-        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("userImageClicked:"))
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(RegistrationViewController.userImageClicked(_:)))
         userImageView.userInteractionEnabled = true
         userImageView.addGestureRecognizer(tapGestureRecognizer)
-        
-        let tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        self.view.addGestureRecognizer(tap)
-    }
-    
-    func dismissKeyboard() {
-        self.view.endEditing(true)
     }
     
     func userImageClicked(sender: UIImageView) {
@@ -57,23 +66,38 @@ class RegistrationViewController: UITableViewController, UIImagePickerController
     }
     
     func nextClicked(sender: UIBarButtonItem) {
+        
         let api = HungryApi.sharedInstance
         
-        if passField.text == "" || nameField.text == "" || surnameField.text == "" || dormField.text == "" || roomField.text == "" {
-            showErrorAlert("Заполните все обязательные поля!")
-            return
+        for key in form.formValues().allKeys {
+            if let _ = form.formValues().objectForKey(key) as? NSNull {
+                showErrorAlert("Все поля обязательны для заполнения!")
+                return
+            }
         }
         
-        if passField.text != confirmPassField.text {
+        if form.formValues().valueForKey("pass") as! String !=
+            form.formValues().valueForKey("confirmPassword") as! String {
             showErrorAlert("Введенные пароли не совпадают")
             return
         }
         
-        api.registration(mail, surname: surnameField.text!, name: nameField.text!, password: passField.text!, sex: sexSegment.selectedValue!, phone: phoneField.text!, vk: "", dormId: dormField.text!, flat: roomField.text!, facultyId: facultyField.text!) {
+        var values = form.formValues() as! [String : String]
+        values["mail"] = mail
+        values["vk"] = ""
+        values["code"] = code
+        
+        api.registration(mail, withFormValues: (values)) {
             
             message in
             if message == "success" {
-                self.navigationController!.dismissViewControllerAnimated(true, completion: nil)
+                let alertController = UIAlertController(title: "Регистрация", message: "Пользователь с адресом \(self.mail) успешно зарегистрирован", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "OK", style: .Default) {
+                    alert in
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+                alertController.addAction(action)
+                self.presentViewController(alertController, animated: true, completion: nil)
             }
             else {
                 self.showErrorAlert(message)
@@ -81,35 +105,88 @@ class RegistrationViewController: UITableViewController, UIImagePickerController
         }
     }
     
-    @IBAction func facultyClicked(sender: UITextField) {
-        self.view.endEditing(true)
-        let index = faculties.indexOf(sender.text!)
-        var initialIndex = 0
-        if index != nil {
-            initialIndex = index!
-        }
-        ActionSheetStringPicker.showPickerWithTitle("Выберите факультет", rows: faculties, initialSelection: initialIndex, doneBlock: {
-            picker, selectedIndex, selectedValue in
-            self.facultyField.text = selectedValue as? String
-            return
-            }, cancelBlock: nil, origin: sender)
-
+    private func loadForms() {
+        form = FormDescriptor()
+        form.title = "Профиль"
+        
+        // create name-surname
+        
+        let nameSection = FormSectionDescriptor()
+        nameSection.headerTitle = ""
+        
+        var row = FormRowDescriptor(tag: Static.name, rowType: .Name, title: "Имя")
+        
+        nameSection.addRow(row)
+        row = FormRowDescriptor(tag: Static.surname, rowType: .Name, title: "Фамилия")
+        nameSection.addRow(row)
+        form.addSection(nameSection)
+        
+        let passSection = FormSectionDescriptor()
+        passSection.headerTitle = "Пароль"
+        
+        row = FormRowDescriptor(tag: Static.password, rowType: .Password, title: "Пароль")
+        passSection.addRow(row)
+        
+        row = FormRowDescriptor(tag: Static.confirmPassword, rowType: .Password, title: "Подтвердите пароль")
+        passSection.addRow(row)
+        
+        form.addSection(passSection)
+        
+        // create sex segment
+        let sexSection = FormSectionDescriptor()
+        sexSection.headerTitle = "Пол"
+        
+        row = FormRowDescriptor(tag: Static.sex, rowType: .SegmentedControl, title: "")
+        
+        row.configuration[FormRowDescriptor.Configuration.Options] = ["М", "Ж"]
+        row.configuration[FormRowDescriptor.Configuration.TitleFormatterClosure] = { value in
+            switch( value ) {
+            case "М":
+                return "Мужской"
+            case "Ж":
+                return "Женский"
+            default:
+                return nil
+            }
+            } as TitleFormatterClosure
+        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["titleLabel.font" : UIFont.boldSystemFontOfSize(30.0), "segmentedControl.tintColor" : UIColor.blueColor()]
+        sexSection.addRow(row)
+        
+        form.addSection(sexSection)
+        
+        // create dorm
+        let dormSection = FormSectionDescriptor()
+        dormSection.headerTitle = "Проживание"
+        row = FormRowDescriptor(tag: Static.dorm, rowType: .Picker, title: "Общежитие")
+        row.configuration[FormRowDescriptor.Configuration.Options] = ["d 1", "d 2", "d 3"]
+        row.value = "d 1"
+        dormSection.addRow(row)
+        
+        row = FormRowDescriptor(tag: Static.flat, rowType: .Text, title: "Квартира")
+        dormSection.addRow(row)
+        
+        form.addSection(dormSection)
+        
+        // create phone-faculty
+        let lastSection = FormSectionDescriptor()
+        lastSection.headerTitle = "Другое"
+        lastSection.addRow(FormRowDescriptor(tag: Static.phone, rowType: .Phone, title: "Телефон"))
+        
+        row = FormRowDescriptor(tag: Static.faculty, rowType: .Picker, title: "Факультет")
+        row.configuration[FormRowDescriptor.Configuration.Options] = ["f 1", "f 2", "f3"]
+        row.value = "f 1"
+        lastSection.addRow(row)
+        
+        form.addSection(lastSection)
+        self.form = form
     }
     
-    @IBAction func dormClicked(sender: UITextField) {
-        self.view.endEditing(true)
-        let index = dorms.indexOf(sender.text!)
-        var initialIndex = 0
-        if index != nil {
-            initialIndex = index!
-        }
-
-        ActionSheetStringPicker.showPickerWithTitle("Выберите общежитие", rows: dorms, initialSelection: initialIndex, doneBlock: {
-                picker, selectedIndex, selectedValue in
-                self.dormField.text = selectedValue as? String
-                return
-        }, cancelBlock: nil, origin: sender)
+    func cancel(sender: UIBarButtonItem) {
+        self.navigationController!.dismissViewControllerAnimated(true, completion: nil)
     }
+}
+
+extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
@@ -123,17 +200,4 @@ class RegistrationViewController: UITableViewController, UIImagePickerController
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    
 }
-
-
-
-
-
-
-
-
-
-
-

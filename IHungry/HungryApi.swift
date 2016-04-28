@@ -12,25 +12,16 @@ import SwiftyJSON
 
 
 class HungryApi {
+    var currentUser: User!
+    
     private let host = "http:/localhost:1337/api"
     
     static let sharedInstance = HungryApi()
     
-    func registration(mail: String, surname: String, name: String, password: String, sex: String, phone: String, vk: String, dormId: String, flat: String, facultyId: String, completeBlock: (String -> Void)) {
-        let params = [
-            "email"     : mail,
-            "surname"   : surname,
-            "name"      : name,
-            "password"  : password,
-            "gender"    : sex,
-            "phone"     : phone,
-            "vk"        : vk,
-            "dorm_id"   : dormId,
-            "flat"      : flat,
-            "facultyId" : facultyId
-        ]
+    func registration(mail: String, withFormValues parameters: [String : String], completeBlock: (String -> Void)) {
+        print(parameters)
         
-        Alamofire.request(.PUT, "\(host)/registration", parameters: params).responseJSON {
+        Alamofire.request(.PUT, "\(host)/registration", parameters: parameters).responseJSON {
             response in
             if let jsonData = response.data {
                 let json = JSON(data: jsonData)
@@ -75,5 +66,24 @@ class HungryApi {
                 completeBlock("Не удалось проверить код")
             }
         }
+    }
+    
+    func login(mail: String, password: String, successBlock: (String -> Void), errorBlock: (String -> Void)) {
+        Alamofire.request(.GET, "\(host)/login", parameters: ["mail":mail, "password":password]).responseJSON {
+            response in
+            if let jsonData = response.data {
+                let json = JSON(data: jsonData)
+                if let errorMessage = json["error"].string {
+                    errorBlock(errorMessage)
+                }
+                else {
+                    successBlock(json["id"].stringValue)
+                }
+            }
+            else {
+                errorBlock("Не удалось войти в систему")
+            }
+        }
+
     }
 }

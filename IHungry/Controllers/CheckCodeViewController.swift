@@ -18,7 +18,9 @@ class CheckCodeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nextButton = UIBarButtonItem(title: "Далее", style: .Plain, target: self, action: "nextButtonClicked:")
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отмена", style: .Plain, target: self, action: #selector(CheckCodeViewController.cancel(_:)))
+        
+        let nextButton = UIBarButtonItem(title: "Далее", style: .Plain, target: self, action: #selector(CheckCodeViewController.nextButtonClicked(_:)))
         self.navigationItem.rightBarButtonItem = nextButton
     
         // Do any additional setup after loading the view.
@@ -59,6 +61,10 @@ class CheckCodeViewController: UIViewController {
         default: break
             
         }
+    }
+    
+    func cancel(sender: UIBarButtonItem) {
+        self.navigationController!.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 

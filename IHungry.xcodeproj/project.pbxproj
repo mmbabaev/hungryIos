@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2758E4746B27AF5A13372C07 /* Pods_IHungry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C731923AC62269B1D198001F /* Pods_IHungry.framework */; };
+		870A487B1CA0099F00708EF0 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870A487A1CA0099F00708EF0 /* RegistrationViewController.swift */; };
 		872D33B21C76306F008A3E0F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872D33B11C76306F008A3E0F /* User.swift */; };
 		873AA0BA1C9B0422004A2891 /* CheckCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873AA0B91C9B0422004A2891 /* CheckCodeViewController.swift */; };
 		875EA9FD1C7B924A00C1EE1D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875EA9FC1C7B924A00C1EE1D /* LoginViewController.swift */; };
@@ -15,7 +16,6 @@
 		875EAA031C7B966E00C1EE1D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875EAA021C7B966E00C1EE1D /* MainViewController.swift */; };
 		875EAA051C7B99F700C1EE1D /* HungryApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875EAA041C7B99F700C1EE1D /* HungryApi.swift */; };
 		8765DB071C8333F7002F17A9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8765DB061C8333F7002F17A9 /* Extensions.swift */; };
-		87D9D68B1C9D6A2400C47031 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9D68A1C9D6A2400C47031 /* RegistrationViewController.swift */; };
 		87D9D68D1C9D6AC100C47031 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 87D9D68C1C9D6AC100C47031 /* user.png */; };
 		87E788181C75B63500333857 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E788171C75B63500333857 /* AppDelegate.swift */; };
 		87E7881A1C75B63500333857 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E788191C75B63500333857 /* ViewController.swift */; };
@@ -32,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		4AA979D491DABA3D90E9F886 /* Pods-IHungry.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IHungry.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IHungry/Pods-IHungry.debug.xcconfig"; sourceTree = "<group>"; };
+		870A487A1CA0099F00708EF0 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegistrationViewController.swift; path = Controllers/RegistrationViewController.swift; sourceTree = "<group>"; };
 		872D33B11C76306F008A3E0F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		873AA0B91C9B0422004A2891 /* CheckCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckCodeViewController.swift; path = Controllers/CheckCodeViewController.swift; sourceTree = "<group>"; };
 		875EA9FC1C7B924A00C1EE1D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Controllers/LoginViewController.swift; sourceTree = "<group>"; };
@@ -39,7 +40,6 @@
 		875EAA021C7B966E00C1EE1D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
 		875EAA041C7B99F700C1EE1D /* HungryApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HungryApi.swift; sourceTree = "<group>"; };
 		8765DB061C8333F7002F17A9 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		87D9D68A1C9D6A2400C47031 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegistrationViewController.swift; path = Controllers/RegistrationViewController.swift; sourceTree = "<group>"; };
 		87D9D68C1C9D6AC100C47031 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
 		87E788141C75B63500333857 /* IHungry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IHungry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87E788171C75B63500333857 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,12 +99,9 @@
 		872D33B01C763029008A3E0F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				875EA9FC1C7B924A00C1EE1D /* LoginViewController.swift */,
-				875EA9FE1C7B926700C1EE1D /* RegistrationEmailViewController.swift */,
+				87F2F5C71CA185E60083422A /* Login */,
 				875EAA021C7B966E00C1EE1D /* MainViewController.swift */,
 				8765DB061C8333F7002F17A9 /* Extensions.swift */,
-				873AA0B91C9B0422004A2891 /* CheckCodeViewController.swift */,
-				87D9D68A1C9D6A2400C47031 /* RegistrationViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -158,6 +155,25 @@
 				87E788231C75B63500333857 /* Info.plist */,
 			);
 			path = IHungry;
+			sourceTree = "<group>";
+		};
+		87F2F5C61CA185C90083422A /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				875EA9FE1C7B926700C1EE1D /* RegistrationEmailViewController.swift */,
+				870A487A1CA0099F00708EF0 /* RegistrationViewController.swift */,
+				873AA0B91C9B0422004A2891 /* CheckCodeViewController.swift */,
+			);
+			name = Registration;
+			sourceTree = "<group>";
+		};
+		87F2F5C71CA185E60083422A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				875EA9FC1C7B924A00C1EE1D /* LoginViewController.swift */,
+				87F2F5C61CA185C90083422A /* Registration */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 		87FB22CB1C9EDB9C00A9BFD9 /* Profile icons */ = {
@@ -306,8 +322,8 @@
 				875EA9FD1C7B924A00C1EE1D /* LoginViewController.swift in Sources */,
 				87E7881A1C75B63500333857 /* ViewController.swift in Sources */,
 				875EA9FF1C7B926700C1EE1D /* RegistrationEmailViewController.swift in Sources */,
+				870A487B1CA0099F00708EF0 /* RegistrationViewController.swift in Sources */,
 				8765DB071C8333F7002F17A9 /* Extensions.swift in Sources */,
-				87D9D68B1C9D6A2400C47031 /* RegistrationViewController.swift in Sources */,
 				875EAA031C7B966E00C1EE1D /* MainViewController.swift in Sources */,
 				873AA0BA1C9B0422004A2891 /* CheckCodeViewController.swift in Sources */,
 				87E788181C75B63500333857 /* AppDelegate.swift in Sources */,

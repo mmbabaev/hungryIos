@@ -53,10 +53,16 @@ class RegistrationEmailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отмена", style: .Plain, target: self, action: #selector(RegistrationEmailViewController.cancel(_:)))
         
-        
-        nextButton = UIBarButtonItem(title: "Далее", style: .Plain, target: self, action: "nextClicked:")
+        nextButton = UIBarButtonItem(title: "Далее", style: .Plain, target: self, action: #selector(RegistrationEmailViewController.nextClicked(_:)))
         self.navigationItem.rightBarButtonItem = nextButton
+        
+        
+    }
+    
+    func cancel(sender: UIBarButtonItem) {
+        self.navigationController!.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

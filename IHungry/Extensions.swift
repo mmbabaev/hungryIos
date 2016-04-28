@@ -23,7 +23,6 @@ extension UIViewController {
         alertController.addAction(defaultAction)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
-
 }
 
 extension String {
@@ -53,3 +52,30 @@ extension UISegmentedControl {
         return self.titleForSegmentAtIndex(self.selectedSegmentIndex)
     }
 }
+
+extension UITextField {
+    var isEmpty: Bool {
+        get {
+            if text == nil || text == "" {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
