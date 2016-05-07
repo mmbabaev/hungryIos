@@ -43,7 +43,7 @@ class CheckCodeViewController: UIViewController {
         api.checkCode(mail, code: passField.text!) {
             message in
             if message == "success" {
-                self.performSegueWithIdentifier("showRegistration", sender: self.mail)
+                self.performSegueWithIdentifier("showRegistration", sender: self.passField.text!)
             }
             else {
                 self.showErrorAlert(message)
@@ -56,8 +56,9 @@ class CheckCodeViewController: UIViewController {
             
         case "showRegistration":
             let registrationVC = segue.destinationViewController as! RegistrationViewController
-            print(mail)
+            let code = sender as! String
             registrationVC.mail = mail
+            registrationVC.code = code
         default: break
             
         }

@@ -16,6 +16,8 @@
 		875EAA031C7B966E00C1EE1D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875EAA021C7B966E00C1EE1D /* MainViewController.swift */; };
 		875EAA051C7B99F700C1EE1D /* HungryApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875EAA041C7B99F700C1EE1D /* HungryApi.swift */; };
 		8765DB071C8333F7002F17A9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8765DB061C8333F7002F17A9 /* Extensions.swift */; };
+		87CB46401CDBBE8F00E7F90C /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CB463F1CDBBE8F00E7F90C /* Invitation.swift */; };
+		87CB46421CDD47FE00E7F90C /* CreateInvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CB46411CDD47FE00E7F90C /* CreateInvitationViewController.swift */; };
 		87D9D68D1C9D6AC100C47031 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 87D9D68C1C9D6AC100C47031 /* user.png */; };
 		87E788181C75B63500333857 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E788171C75B63500333857 /* AppDelegate.swift */; };
 		87E7881A1C75B63500333857 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E788191C75B63500333857 /* ViewController.swift */; };
@@ -40,6 +42,8 @@
 		875EAA021C7B966E00C1EE1D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
 		875EAA041C7B99F700C1EE1D /* HungryApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HungryApi.swift; sourceTree = "<group>"; };
 		8765DB061C8333F7002F17A9 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		87CB463F1CDBBE8F00E7F90C /* Invitation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
+		87CB46411CDD47FE00E7F90C /* CreateInvitationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateInvitationViewController.swift; path = Controllers/CreateInvitationViewController.swift; sourceTree = "<group>"; };
 		87D9D68C1C9D6AC100C47031 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
 		87E788141C75B63500333857 /* IHungry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IHungry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87E788171C75B63500333857 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 			children = (
 				872D33B11C76306F008A3E0F /* User.swift */,
 				875EAA041C7B99F700C1EE1D /* HungryApi.swift */,
+				87CB463F1CDBBE8F00E7F90C /* Invitation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -102,6 +107,7 @@
 				87F2F5C71CA185E60083422A /* Login */,
 				875EAA021C7B966E00C1EE1D /* MainViewController.swift */,
 				8765DB061C8333F7002F17A9 /* Extensions.swift */,
+				87CB46411CDD47FE00E7F90C /* CreateInvitationViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -325,8 +331,10 @@
 				870A487B1CA0099F00708EF0 /* RegistrationViewController.swift in Sources */,
 				8765DB071C8333F7002F17A9 /* Extensions.swift in Sources */,
 				875EAA031C7B966E00C1EE1D /* MainViewController.swift in Sources */,
+				87CB46421CDD47FE00E7F90C /* CreateInvitationViewController.swift in Sources */,
 				873AA0BA1C9B0422004A2891 /* CheckCodeViewController.swift in Sources */,
 				87E788181C75B63500333857 /* AppDelegate.swift in Sources */,
+				87CB46401CDBBE8F00E7F90C /* Invitation.swift in Sources */,
 				872D33B21C76306F008A3E0F /* User.swift in Sources */,
 				875EAA051C7B99F700C1EE1D /* HungryApi.swift in Sources */,
 			);

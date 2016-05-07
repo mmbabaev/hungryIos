@@ -66,7 +66,27 @@ extension UITextField {
     }
 }
 
+extension UIViewController {
+    func showLoginViewController() {
+        print("show login Vc")
+    }
+}
 
+extension NSDateFormatter {
+    convenience init(dateFormat: String) {
+        self.init()
+        self.dateFormat = dateFormat
+    }
+}
+
+extension NSDate {
+    func toDateTimeString() -> String {
+        let dateFormat = NSDateFormatter(dateFormat: "yyyy-MM-dd")
+        let timeFormat = NSDateFormatter(dateFormat: "HH:mm:ss")
+        
+        return dateFormat.stringFromDate(self) + " " + timeFormat.stringFromDate(self)
+    }
+}
 
 
 

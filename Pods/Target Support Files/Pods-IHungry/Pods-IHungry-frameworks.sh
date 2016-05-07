@@ -86,12 +86,14 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-IHungry/ActionSheetPicker_3_0.framework"
   install_framework "Pods-IHungry/Alamofire.framework"
+  install_framework "Pods-IHungry/Alamofire_Synchronous.framework"
   install_framework "Pods-IHungry/SwiftForms.framework"
   install_framework "Pods-IHungry/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-IHungry/ActionSheetPicker_3_0.framework"
   install_framework "Pods-IHungry/Alamofire.framework"
+  install_framework "Pods-IHungry/Alamofire_Synchronous.framework"
   install_framework "Pods-IHungry/SwiftForms.framework"
   install_framework "Pods-IHungry/SwiftyJSON.framework"
 fi

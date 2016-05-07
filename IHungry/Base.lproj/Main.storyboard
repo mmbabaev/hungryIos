@@ -30,6 +30,13 @@
                                     <segue destination="BYZ-38-t0r" kind="presentation" id="dCp-6a-8ud"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OWS-Pb-iKA">
+                                <rect key="frame" x="108" y="501" width="159" height="30"/>
+                                <state key="normal" title="Создать приглашение"/>
+                                <connections>
+                                    <segue destination="Dw3-fI-7qd" kind="presentation" id="Flf-0X-8Kb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -38,6 +45,85 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sL4-3Q-569" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-176.5" y="1145.5"/>
+        </scene>
+        <!--Create Invitation View Controller-->
+        <scene sceneID="eeq-FE-Ygo">
+            <objects>
+                <viewController id="Dw3-fI-7qd" customClass="CreateInvitationViewController" customModule="IHungry" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mj8-jK-4lz"/>
+                        <viewControllerLayoutGuide type="bottom" id="jcX-AV-5lK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="c0V-ii-Vgr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="10" translatesAutoresizingMaskIntoConstraints="NO" id="89I-0r-Zdd">
+                                <rect key="frame" x="0.0" y="263" width="375" height="152"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="152" id="mq3-7X-PuO"/>
+                                </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="484262123.45783699">
+                                    <!--2016-05-06 21:15:23 +0000-->
+                                </date>
+                            </datePicker>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X5v-Lg-hkW">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Новое приглашение" id="ce3-au-vzS">
+                                        <barButtonItem key="leftBarButtonItem" title="Отмена" id="kqV-uK-did">
+                                            <connections>
+                                                <action selector="cancelButtonClicked:" destination="Dw3-fI-7qd" id="ksd-Ag-Dcx"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Готово" id="RJQ-Mz-HWJ">
+                                            <connections>
+                                                <action selector="doneButtonClicked:" destination="Dw3-fI-7qd" id="QWh-mv-ddS"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7eO-OM-6rp">
+                                <rect key="frame" x="0.0" y="94" width="375" height="161"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Ys-a6-DkV">
+                                <rect key="frame" x="0.0" y="64" width="375" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="X5v-Lg-hkW" firstAttribute="top" secondItem="Mj8-jK-4lz" secondAttribute="bottom" id="5p4-8p-Mdn"/>
+                            <constraint firstItem="4Ys-a6-DkV" firstAttribute="trailing" secondItem="7eO-OM-6rp" secondAttribute="trailing" id="AIo-Q6-1kf"/>
+                            <constraint firstItem="7eO-OM-6rp" firstAttribute="leading" secondItem="89I-0r-Zdd" secondAttribute="leading" id="G6y-Wr-bbo"/>
+                            <constraint firstItem="4Ys-a6-DkV" firstAttribute="leading" secondItem="7eO-OM-6rp" secondAttribute="leading" id="MQb-92-CKY"/>
+                            <constraint firstAttribute="trailing" secondItem="X5v-Lg-hkW" secondAttribute="trailing" id="VwA-Ys-gSs"/>
+                            <constraint firstItem="X5v-Lg-hkW" firstAttribute="leading" secondItem="4Ys-a6-DkV" secondAttribute="leading" id="Zyk-W6-VjU"/>
+                            <constraint firstItem="jcX-AV-5lK" firstAttribute="top" secondItem="89I-0r-Zdd" secondAttribute="bottom" constant="252" id="cza-lt-T5U"/>
+                            <constraint firstItem="X5v-Lg-hkW" firstAttribute="leading" secondItem="c0V-ii-Vgr" secondAttribute="leading" id="d9X-0P-tqi"/>
+                            <constraint firstItem="7eO-OM-6rp" firstAttribute="trailing" secondItem="89I-0r-Zdd" secondAttribute="trailing" id="duF-Dw-lN0"/>
+                            <constraint firstItem="89I-0r-Zdd" firstAttribute="top" secondItem="7eO-OM-6rp" secondAttribute="bottom" constant="8" symbolic="YES" id="mbg-8F-BIg"/>
+                            <constraint firstItem="7eO-OM-6rp" firstAttribute="top" secondItem="4Ys-a6-DkV" secondAttribute="bottom" id="pwy-Ho-PRZ"/>
+                            <constraint firstItem="4Ys-a6-DkV" firstAttribute="top" secondItem="X5v-Lg-hkW" secondAttribute="bottom" id="q3r-Ec-Vyk"/>
+                            <constraint firstItem="X5v-Lg-hkW" firstAttribute="trailing" secondItem="4Ys-a6-DkV" secondAttribute="trailing" id="qdb-Z7-Ngy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dishAboutTextView" destination="7eO-OM-6rp" id="CeA-6k-lSf"/>
+                        <outlet property="dishTextField" destination="4Ys-a6-DkV" id="jqq-vc-f3t"/>
+                        <outlet property="timePicker" destination="89I-0r-Zdd" id="q8H-IW-v0d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WcX-JY-Fjf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="361.5" y="1498.5"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -156,17 +242,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jJv-u4-81f">
+                                <rect key="frame" x="65" y="319" width="247" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done"/>
+                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Введите свой почтовый адрес:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pow-rF-yIe">
-                                <rect key="frame" x="65" y="241" width="247" height="21"/>
+                                <rect key="frame" x="65" y="290" width="247" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jJv-u4-81f">
-                                <rect key="frame" x="65" y="299" width="247" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -193,12 +279,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EM1-Dd-PMW">
-                                <rect key="frame" x="109" y="214" width="156" height="30"/>
+                                <rect key="frame" x="109" y="319" width="156" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Введите полученный код:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nsf-bM-xu7">
-                                <rect key="frame" x="84" y="185" width="206" height="21"/>
+                                <rect key="frame" x="84" y="290" width="206" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>

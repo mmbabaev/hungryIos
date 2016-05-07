@@ -10,6 +10,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 pod 'SwiftForms'
 pod 'ActionSheetPicker-3.0'
 pod 'Alamofire', '~> 3.0'
+pod 'Alamofire-Synchronous', '~> 3.0'
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 end
 

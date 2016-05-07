@@ -40,8 +40,7 @@ class LoginViewController: UIViewController {
         
         let api = HungryApi.sharedInstance
         
-        func successBlockFunc(id: String) {
-            api.currentUser = User(id: id, password: passwordField.text!)
+        func successBlockFunc() {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         

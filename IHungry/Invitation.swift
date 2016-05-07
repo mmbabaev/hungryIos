@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+struct Invitation {
+    var dish: String
+    var dishAbout: String
+    var time: String
+}

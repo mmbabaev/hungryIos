@@ -35,8 +35,8 @@ class RegistrationViewController: FormViewController {
     var phoneField: FormRowDescriptor!
     var facultyPicker: FormRowDescriptor!
 
-    var mail: String! = "mmbabaev@gmail.com"
-    var code: String! = ""
+    var mail: String!
+    var code: String!
     let imagePicker = UIImagePickerController()
     
     required init(coder aDecoder: NSCoder) {
@@ -86,6 +86,7 @@ class RegistrationViewController: FormViewController {
         values["mail"] = mail
         values["vk"] = ""
         values["code"] = code
+        values["appID"] = api.appID
         
         api.registration(mail, withFormValues: (values)) {
             
@@ -138,12 +139,12 @@ class RegistrationViewController: FormViewController {
         
         row = FormRowDescriptor(tag: Static.sex, rowType: .SegmentedControl, title: "")
         
-        row.configuration[FormRowDescriptor.Configuration.Options] = ["М", "Ж"]
+        row.configuration[FormRowDescriptor.Configuration.Options] = ["m", "w"]
         row.configuration[FormRowDescriptor.Configuration.TitleFormatterClosure] = { value in
             switch( value ) {
-            case "М":
+            case "m":
                 return "Мужской"
-            case "Ж":
+            case "w":
                 return "Женский"
             default:
                 return nil
@@ -166,7 +167,6 @@ class RegistrationViewController: FormViewController {
         dormSection.addRow(row)
         
         form.addSection(dormSection)
-        
         // create phone-faculty
         let lastSection = FormSectionDescriptor()
         lastSection.headerTitle = "Другое"
