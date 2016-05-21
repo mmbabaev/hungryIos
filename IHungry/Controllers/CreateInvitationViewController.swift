@@ -14,6 +14,7 @@ class CreateInvitationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         timeFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        timePicker.locale = NSLocale(localeIdentifier: "NL")
     }
     
     @IBAction func cancelButtonClicked(sender: UIBarButtonItem) {

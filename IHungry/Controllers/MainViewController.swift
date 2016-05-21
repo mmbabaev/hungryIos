@@ -10,6 +10,20 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    let api = HungryApi.sharedInstance
+    
+    @IBAction func iHungryClicked(sender: UIButton) {
+        func successBlock() {
+            showAlert("Success", message: "")
+        }
+        
+        func failedBlock(message: String) {
+            showErrorAlert(message)
+        }
+        
+        api.iHungry(successBlock, failedBlock: failedBlock, sender: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

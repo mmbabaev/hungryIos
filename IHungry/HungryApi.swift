@@ -16,12 +16,19 @@ class HungryApi {
     var currentUser: User!
     let appID: String = UIDevice.currentDevice().identifierForVendor!.UUIDString
 
+    //private let host = "http:/hungry.styleru.net:1337/api"
     private let host = "http:/localhost:8000/api"
     
-    private let accessToken = "accessToken"
     private let connectionError = "Ошибка соединения"
     
     static let sharedInstance = HungryApi()
+    
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
+    init() {
+        let manager = Alamofire.Manager.sharedInstance
+        manager.session.configuration.timeoutIntervalForResource = 5
+    }
     
     func registration(mail: String, withFormValues parameters: [String : String], completeBlock: (String -> Void)) {
         
@@ -63,7 +70,8 @@ class HungryApi {
             response in
             if let jsonData = response.data {
                 let json = JSON(data: jsonData)
-                if let errorMessage = json["error"].string {
+                if json["status"].stringValue == "error" {
+                    let errorMessage = json["text"].stringValue
                     completeBlock(errorMessage)
                 }
                 else {
@@ -105,10 +113,10 @@ class HungryApi {
     func makeInvite(invitation: Invitation, successBlock: (() -> ()), failedBlock: (String -> ()), sender: UIViewController) {
         //TODO: здесь обрабатывать meetTime?
         
-        let defaults = NSUserDefaults.standardUserDefaults()
+
         
         let params = [
-            "token"     : defaults.valueForKey("accessToken") as! String,
+            "token"     : accessToken,
             "dish"      : invitation.dish,
             "dishAbout" : invitation.dishAbout,
             "meetTime"  : invitation.time
@@ -136,6 +144,35 @@ class HungryApi {
                 failedBlock(self.connectionError)
             }
         }
+    }
+    
+    func iHungry(successBlock: () -> (), failedBlock: (String) -> (), sender: UIViewController) {
+        
+        let token = accessToken
+
+        Alamofire.request(.GET, "\(host)/IHungry", parameters: ["token": token]).responseJSON {
+            response in switch response.result {
+            case .Success(let data):
+                let json = JSON(data)
+                let status = json["status"].stringValue
+                
+                switch status {
+                case "success":
+                    successBlock()
+                case "invalid token":
+                    let newSuccessBlock = {
+                        self.iHungry(successBlock, failedBlock: failedBlock, sender: sender)
+                    }
+                    self.updateToken(sender, successBlock: newSuccessBlock, failedBlock: failedBlock)
+                default:
+                    failedBlock(self.connectionError)
+                }
+                
+            case .Failure(_):
+                failedBlock(self.connectionError)
+            }
+        }
+
     }
     
     private func updateToken(vc: UIViewController, successBlock: (() -> ()), failedBlock: (String -> ())) {
@@ -168,4 +205,33 @@ class HungryApi {
             failedBlock(connectionError)
         }
     }
+    
+    private var accessToken: String {
+        return (defaults.valueForKey("accessToken") as? String) ?? ""
+    }
+    
+    private var refreshToken: String {
+        return (defaults.valueForKey("refreshToken") as? String) ?? ""
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
